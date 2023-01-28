@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  p-backend:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: p-backend
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./src:/app
+  p-db:
+    image: mysql:5.7
+    container_name: p-db
+    ports:
+      - '3306:3306'
+    volumes:
+      - ./data/db:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: test_db
+      MYSQL_USER: test_user
+      MYSQL_PASSWORD: test_password
