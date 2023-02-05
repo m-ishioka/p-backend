@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "golang.Go",
+    "766b.go-outliner",
+    "premparihar.gotestexplorer",
+    "TabNine.tabnine-vscode"
+  ],
+  "unwantedRecommendations": []
+}
