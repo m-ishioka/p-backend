@@ -21,10 +21,13 @@
 go.work
 
 # ent
-/src/ent/*
-!/src/ent/schema
+go/src/ent/*
+!go/src/ent/schema
 
 data
 
 #grpc
 src/pkg
+
+**/tmp/
+*.log
