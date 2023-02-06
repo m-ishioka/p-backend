@@ -25,7 +25,7 @@ func (ProcessType) Fields() []ent.Field {
 // Edges of the ProcessType.
 func (ProcessType) Edges() []ent.Edge {
 	return []ent.Edge{
-		edge.To("ptpid", ProjectProcess.Type).Annotations(
+		edge.To("projects", Project.Type).Annotations(
 			entproto.Field(3),
 		),
 	}

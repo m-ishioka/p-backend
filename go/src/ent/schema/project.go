@@ -18,27 +18,36 @@ type Project struct {
 // Fields of the Project.
 func (Project) Fields() []ent.Field {
 	return []ent.Field{
+		field.String("key").Annotations(
+			entproto.Field(2),
+		),
+		field.String("name").Annotations(
+			entproto.Field(3),
+		),
 		field.Time("start_date").
 			Default(time.Now).Annotations(
-			entproto.Field(2),
+			entproto.Field(4),
 		),
 		field.Time("end_date").
 			Default(time.Now).Annotations(
-			entproto.Field(3),
+			entproto.Field(5),
 		),
 		field.String("role").Annotations(
-			entproto.Field(4),
+			entproto.Field(6),
 		),
-		field.String("scale").Annotations(
-			entproto.Field(5),
+		field.Int("scale").Annotations(
+			entproto.Field(7),
+		),
+		field.String("description").Annotations(
+			entproto.Field(8),
 		),
 		field.Time("created_at").
 			Default(time.Now).Immutable().Annotations(
-			entproto.Field(6),
+			entproto.Field(9),
 		),
 		field.Time("updated_at").
 			Default(time.Now).Annotations(
-			entproto.Field(7),
+			entproto.Field(10),
 		),
 	}
 }
@@ -46,11 +55,11 @@ func (Project) Fields() []ent.Field {
 // Edges of the Project.
 func (Project) Edges() []ent.Edge {
 	return []ent.Edge{
-		edge.To("ppsid", ProjectSkills.Type).Unique().Annotations(
-			entproto.Field(8),
+		edge.To("skills", Skill.Type).Annotations(
+			entproto.Field(11),
 		),
-		edge.To("pppid", ProjectProcess.Type).Unique().Annotations(
-			entproto.Field(9),
+		edge.From("processTypes", ProcessType.Type).Ref("projects").Annotations(
+			entproto.Field(12),
 		),
 	}
 }

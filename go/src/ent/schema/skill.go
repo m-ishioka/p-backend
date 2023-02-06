@@ -21,19 +21,25 @@ func (Skill) Fields() []ent.Field {
 		field.String("name").Annotations(
 			entproto.Field(2),
 		),
-		field.Int("level").Annotations(
+		field.String("key").Annotations(
 			entproto.Field(3),
 		),
-		field.Int("scale").Annotations(
+		field.Int("level").Annotations(
 			entproto.Field(4),
+		),
+		field.Float32("experience").Annotations(
+			entproto.Field(5),
+		),
+		field.String("description").Annotations(
+			entproto.Field(6),
 		),
 		field.Time("created_at").
 			Default(time.Now).Immutable().Annotations(
-			entproto.Field(5),
+			entproto.Field(7),
 		),
 		field.Time("updated_at").
 			Default(time.Now).Annotations(
-			entproto.Field(6),
+			entproto.Field(8),
 		),
 	}
 }
@@ -42,12 +48,12 @@ func (Skill) Fields() []ent.Field {
 func (Skill) Edges() []ent.Edge {
 	return []ent.Edge{
 		edge.From("skillType", SkillType.Type).
-			Ref("stsid").
+			Ref("skillType").
 			Unique().Required().Annotations(
-			entproto.Field(7),
+			entproto.Field(9),
 		),
-		edge.To("spsid", ProjectSkills.Type).Unique().Annotations(
-			entproto.Field(8),
+		edge.From("projects", Project.Type).Ref("skills").Annotations(
+			entproto.Field(10),
 		),
 	}
 }

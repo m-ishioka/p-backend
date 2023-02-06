@@ -19,7 +19,7 @@ dev:
 
 .PLONY: generate
 generate:
-	docker-compose run --rm p-backend go generate ./...
+	docker-compose run --rm backend go generate ./...
 
 .PLONY: client
 client:

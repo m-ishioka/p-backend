@@ -25,7 +25,7 @@ func (SkillType) Fields() []ent.Field {
 // Edges of the SkillType.
 func (SkillType) Edges() []ent.Edge {
 	return []ent.Edge{
-		edge.To("stsid", Skill.Type).Annotations(
+		edge.To("skillType", Skill.Type).Annotations(
 			entproto.Field(3),
 		),
 	}
