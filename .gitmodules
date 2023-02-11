@@ -1,0 +1,3 @@
+[submodule "go/src/ent/proto"]
+	path = go/src/ent/proto
+	url = https://github.com/m-ishioka/p-protocol-buffuers

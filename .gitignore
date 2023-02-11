@@ -22,6 +22,7 @@ go.work
 
 # ent
 go/src/ent/*
+go/src/ent/proto
 !go/src/ent/schema
 
 data
