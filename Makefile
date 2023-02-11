@@ -32,10 +32,3 @@ create-schema :
 .PHONY: insert-seed
 insert-seed :
 	docker-compose run --rm backend go run ./cmd/migration/seed/main.go
-
-# .PLONY: client
-# client:
-# 	docker-compose exec p-backend go run -mod=mod ./cmd/migration/main.go create_users
-
-# make model
-# docker-compose exec p-backend go run -mod=mod entgo.io/ent/cmd/ent init User
