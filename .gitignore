@@ -25,6 +25,9 @@ go/src/ent/*
 go/src/ent/proto
 !go/src/ent/schema
 
+#seed
+go/src/cmd/migration/seed/*
+
 data
 
 #grpc
