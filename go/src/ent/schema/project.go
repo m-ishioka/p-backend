@@ -18,7 +18,7 @@ type Project struct {
 // Fields of the Project.
 func (Project) Fields() []ent.Field {
 	return []ent.Field{
-		field.String("key").Annotations(
+		field.String("IDKey").Annotations(
 			entproto.Field(2),
 		),
 		field.String("name").Annotations(
@@ -38,7 +38,7 @@ func (Project) Fields() []ent.Field {
 		field.Int("scale").Annotations(
 			entproto.Field(7),
 		),
-		field.String("description").Annotations(
+		field.Bytes("description").Annotations(
 			entproto.Field(8),
 		),
 		field.Time("created_at").

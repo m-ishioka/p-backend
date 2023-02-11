@@ -18,28 +18,31 @@ type Skill struct {
 // Fields of the Skill.
 func (Skill) Fields() []ent.Field {
 	return []ent.Field{
+		field.String("IDKey").Annotations(
+			entproto.Field(3),
+		),
 		field.String("name").Annotations(
 			entproto.Field(2),
 		),
-		field.String("key").Annotations(
-			entproto.Field(3),
-		),
-		field.Int("level").Annotations(
+		field.String("iconName").Annotations(
 			entproto.Field(4),
 		),
-		field.Float32("experience").Annotations(
+		field.Int("level").Annotations(
 			entproto.Field(5),
 		),
-		field.String("description").Annotations(
+		field.Float32("experience").Annotations(
 			entproto.Field(6),
+		),
+		field.Bytes("description").Annotations(
+			entproto.Field(7),
 		),
 		field.Time("created_at").
 			Default(time.Now).Immutable().Annotations(
-			entproto.Field(7),
+			entproto.Field(8),
 		),
 		field.Time("updated_at").
 			Default(time.Now).Annotations(
-			entproto.Field(8),
+			entproto.Field(9),
 		),
 	}
 }
@@ -50,10 +53,10 @@ func (Skill) Edges() []ent.Edge {
 		edge.From("skillType", SkillType.Type).
 			Ref("skillType").
 			Unique().Required().Annotations(
-			entproto.Field(9),
+			entproto.Field(10),
 		),
 		edge.From("projects", Project.Type).Ref("skills").Annotations(
-			entproto.Field(10),
+			entproto.Field(11),
 		),
 	}
 }

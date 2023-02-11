@@ -7,9 +7,9 @@ import (
 	"os"
 	"src/ent"
 	"src/ent/proto/entpb"
+	service "src/service"
 
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/improbable-eng/grpc-web/go/grpcweb"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
@@ -34,17 +34,15 @@ func main() {
 	}
 	defer client.Close()
 
-	grpcServer := grpc.NewServer()
-	svc := entpb.NewProcessTypeService(client)
-	npps := entpb.NewProjectProcessService(client)
-
-	grpcweb.WithAllowNonRootResource(true)
-	grpcweb.WithCorsForRegisteredEndpointsOnly(false)
-
 	// wrappedGrpcServer := grpcweb.WrapServer(grpcServer, grpcweb.WithOriginFunc(func(origin string) bool { return true }))
 
-	entpb.RegisterProcessTypeServiceServer(grpcServer, svc)
-	entpb.RegisterProjectProcessServiceServer(grpcServer, npps)
+	grpcServer := grpc.NewServer()
+	// grpcweb.WithAllowNonRootResource(true)
+	// grpcweb.WithCorsForRegisteredEndpointsOnly(false)
+	entpb.RegisterProcessTypeServiceServer(grpcServer, entpb.NewProcessTypeService(client))
+	entpb.RegisterProjectServiceServer(grpcServer, service.NewCustomProjectService(client))
+	entpb.RegisterSkillServiceServer(grpcServer, service.NewCustomSkillService(client))
+	entpb.RegisterSkillTypeServiceServer(grpcServer, entpb.NewSkillTypeService(client))
 
 	// grpcMux := http.NewServeMux()
 	// grpcMux.Handle("/", wrappedGrpcServer)

@@ -5,6 +5,7 @@ go 1.18
 require (
 	entgo.io/contrib v0.3.4
 	github.com/go-sql-driver/mysql v1.7.0
+	github.com/improbable-eng/grpc-web v0.15.0
 	google.golang.org/grpc v1.52.3
 	google.golang.org/protobuf v1.28.1
 )
@@ -12,7 +13,6 @@ require (
 require (
 	github.com/cenkalti/backoff/v4 v4.2.0 // indirect
 	github.com/desertbit/timer v0.0.0-20180107155436-c41aec40b27f // indirect
-	github.com/improbable-eng/grpc-web v0.15.0 // indirect
 	github.com/jhump/protoreflect v1.14.1 // indirect
 	github.com/klauspost/compress v1.15.15 // indirect
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
@@ -24,7 +24,7 @@ require (
 )
 
 require (
-	ariga.io/atlas v0.9.1-0.20230119145809-92243f7c55cb // indirect
+	ariga.io/atlas v0.9.1-0.20230119145809-92243f7c55cb
 	entgo.io/ent v0.11.7
 	github.com/agext/levenshtein v1.2.3 // indirect
 	github.com/apparentlymart/go-textseg/v13 v13.0.0 // indirect

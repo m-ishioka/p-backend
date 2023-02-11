@@ -32,7 +32,6 @@ services:
       MYSQL_PASSWORD: test_password
     networks:
       - default
-      - shared-network
   envoy:
     container_name: p-envoy
     build:
@@ -42,6 +41,3 @@ services:
       - "8080:8080"
 volumes:
   db_data:
-networks:
-  shared-network:
-    external: true
