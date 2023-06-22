@@ -6,6 +6,7 @@ services:
       context: ./go/
       dockerfile: Dockerfile
     command: air -c .air.toml
+    # command: go run main.go
     ports:
       - "5001:5001"
       - "5002:5002"

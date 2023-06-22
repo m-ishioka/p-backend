@@ -36,3 +36,5 @@ RUN go install entgo.io/ent/cmd/ent@v0.11.0
 RUN go install entgo.io/contrib/entproto/cmd/protoc-gen-entgrpc@latest
 
 EXPOSE 5001
+
+CMD ["go", "run", "main.go"]
