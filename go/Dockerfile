@@ -25,6 +25,8 @@ WORKDIR /app
 
 COPY ./src/ ./
 
+RUN go mod download
+
 RUN mkdir -p ent/migrate/migrations
 
 # gRPC
@@ -35,8 +37,6 @@ RUN go install entgo.io/ent/cmd/ent@v0.11.0
 # ent + grpc
 RUN go install entgo.io/contrib/entproto/cmd/protoc-gen-entgrpc@latest
 
-RUN go build -o /docker-gs-ping
-
 EXPOSE 5001
 
-CMD [ "/docker-gs-ping" ]
+CMD ["go", "run", "main.go"]
