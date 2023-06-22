@@ -61,7 +61,7 @@ func main() {
 	// }))
 	// http.ListenAndServe(":5001", grpcMux)
 
-	lis, err := net.Listen("tcp", ":5001")
+	lis, err := net.Listen("tcp", ":8080")
 	reflection.Register(grpcServer)
 	// // grpcServer.RegisterService(&entpb.ProcessTypeService_ServiceDesc, svc)
 	if err := grpcServer.Serve(lis); err != nil {
