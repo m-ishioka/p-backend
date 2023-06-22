@@ -10,9 +10,7 @@ steps:
         "gcr.io/$PROJECT_ID/$_APP_NAME:latest",
         "--cache-from",
         "gcr.io/$PROJECT_ID/$_APP_NAME:latest",
-        "--build-arg",
-        "_HASURA_CONFIG=$_HASURA_CONFIG",
-        "$_BUILD_CONTEXT",
+        "./go/",
       ]
 
   - id: "Push Image"
