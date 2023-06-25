@@ -21,10 +21,12 @@ RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - && apt install -y no
 RUN npm -g install protoc-gen-grpc-web
 RUN npm -g install protoc-gen-ts
 
-WORKDIR /src
+WORKDIR /app
 
 COPY ./src/ ./
 COPY ./src/ ./usr/local/go/src/src/
+COPY ./src/ ./usr/local/go/src/
+COPY ./src/ ./usr/local/go/
 
 
 
