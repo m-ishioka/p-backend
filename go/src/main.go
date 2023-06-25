@@ -62,7 +62,6 @@ func main() {
 	// 	fmt.Fprintf(resp, "Hello!")
 	// }))
 	// http.ListenAndServe(":5001", grpcMux)
-
 	healthSvc := health.NewServer()
   healthpb.RegisterHealthServer(grpcServer, healthSvc)
   healthSvc.SetServingStatus("bookstore.BookstoreService", healthpb.HealthCheckResponse_SERVING)

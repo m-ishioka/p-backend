@@ -21,9 +21,11 @@ RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - && apt install -y no
 RUN npm -g install protoc-gen-grpc-web
 RUN npm -g install protoc-gen-ts
 
-WORKDIR /app
+WORKDIR /src
 
 COPY ./src/ ./
+
+
 
 RUN mkdir -p ent/migrate/migrations
 
