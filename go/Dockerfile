@@ -40,10 +40,13 @@ COPY src/go.sum ./
 
 RUN go mod download
 
-COPY src/*.go ./
+COPY src/ ./
 
 RUN mkdir -p ent/migrate/migrations
 
+RUN CGO_ENABLED=0 GOOS=linux go build -o /docker-gs-ping
+
 EXPOSE 5001
 
-CMD ["go", "run", "main.go"]
+# CMD ["go", "run", "main.go"]
+CMD ["/docker-gs-ping"]
