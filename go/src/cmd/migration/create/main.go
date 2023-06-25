@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 	"log"
-	"src/ent"
-	"src/ent/migrate"
+	"./ent"
+	"./ent/migrate"
 
 	_ "github.com/go-sql-driver/mysql"
 )

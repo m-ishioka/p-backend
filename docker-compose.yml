@@ -12,7 +12,7 @@ services:
       - "5002:5002"
       - "8000:8000"
     volumes:
-      - ./go/src:/src
+      - ./go/src:/app
     depends_on:
       - db
       - envoy

@@ -5,9 +5,9 @@ import (
 	"log"
 	"net"
 	"os"
-	"ent"
-	"ent/proto/entpb"
-	service "service"
+	"./ent"
+	"./ent/proto/entpb"
+	service "./service"
 
 	_ "github.com/go-sql-driver/mysql"
 	"google.golang.org/grpc"

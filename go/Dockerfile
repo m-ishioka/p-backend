@@ -23,10 +23,10 @@ RUN npm -g install protoc-gen-ts
 
 WORKDIR /app
 
-COPY ./src/ ./
-COPY ./src/ ./usr/local/go/src/src/
-COPY ./src/ ./usr/local/go/src/
-COPY ./src/ ./usr/local/go/
+COPY src/ ./
+COPY src/ ./usr/local/go/src/src/
+COPY src/ ./usr/local/go/src/
+COPY src/ ./usr/local/go/
 
 
 

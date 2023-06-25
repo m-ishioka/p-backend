@@ -7,7 +7,7 @@ import (
 	"math/rand"
 	"time"
 
-	"src/ent/proto/entpb"
+	"./ent/proto/entpb"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
