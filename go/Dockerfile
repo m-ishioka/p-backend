@@ -32,7 +32,7 @@ COPY src/go.sum ./
 
 RUN go mod download
 
-COPY src/ ./
+COPY src/*.go ./
 
 RUN mkdir -p ent/migrate/migrations
 
