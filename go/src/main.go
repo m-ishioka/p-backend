@@ -12,6 +12,8 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
+	"google.golang.org/grpc/health"
+  healthpb "google.golang.org/grpc/health/grpc_health_v1"
 )
 
 func main() {
@@ -61,10 +63,16 @@ func main() {
 	// }))
 	// http.ListenAndServe(":5001", grpcMux)
 
-	lis, err := net.Listen("http", ":8080")
+	lis, err := net.Listen("tcp", ":5001")
 	reflection.Register(grpcServer)
 	// // grpcServer.RegisterService(&entpb.ProcessTypeService_ServiceDesc, svc)
 	if err := grpcServer.Serve(lis); err != nil {
 		log.Fatalf("server ended: %s", err)
 	}
+
+	healthSvc := health.NewServer()
+  healthpb.RegisterHealthServer(grpcServer, healthSvc)
+  healthSvc.SetServingStatus("bookstore.BookstoreService", healthpb.HealthCheckResponse_SERVING)
+
+  reflection.Register(grpcServer)
 }

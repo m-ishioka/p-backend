@@ -5,22 +5,16 @@ go 1.18
 require (
 	entgo.io/contrib v0.3.4
 	github.com/go-sql-driver/mysql v1.7.0
-	github.com/improbable-eng/grpc-web v0.15.0
 	google.golang.org/grpc v1.52.3
 	google.golang.org/protobuf v1.28.1
 )
 
 require (
-	github.com/cenkalti/backoff/v4 v4.2.0 // indirect
-	github.com/desertbit/timer v0.0.0-20180107155436-c41aec40b27f // indirect
 	github.com/jhump/protoreflect v1.14.1 // indirect
-	github.com/klauspost/compress v1.15.15 // indirect
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
-	github.com/rs/cors v1.8.3 // indirect
 	go.uber.org/atomic v1.10.0 // indirect
 	go.uber.org/multierr v1.9.0 // indirect
 	golang.org/x/tools v0.5.0 // indirect
-	nhooyr.io/websocket v1.8.7 // indirect
 )
 
 require (

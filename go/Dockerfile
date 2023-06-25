@@ -25,8 +25,6 @@ WORKDIR /app
 
 COPY ./src/ ./
 
-RUN go mod download
-
 RUN mkdir -p ent/migrate/migrations
 
 # gRPC
@@ -37,6 +35,6 @@ RUN go install entgo.io/ent/cmd/ent@v0.11.0
 # ent + grpc
 RUN go install entgo.io/contrib/entproto/cmd/protoc-gen-entgrpc@latest
 
-EXPOSE 8080
+EXPOSE 5001
 
 CMD ["go", "run", "main.go"]
