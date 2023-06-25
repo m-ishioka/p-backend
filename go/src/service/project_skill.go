@@ -4,9 +4,9 @@ import (
 	context "context"
 	base64 "encoding/base64"
 	fmt "fmt"
-	ent "src/ent"
-	entpb "src/ent/proto/entpb"
-	skill "src/ent/skill"
+	ent "ent"
+	entpb "ent/proto/entpb"
+	skill "ent/skill"
 	strconv "strconv"
 
 	entproto "entgo.io/contrib/entproto"
