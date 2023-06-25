@@ -21,16 +21,18 @@ RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - && apt install -y no
 RUN npm -g install protoc-gen-grpc-web
 RUN npm -g install protoc-gen-ts
 
+ENV PATH "$PATH:$(go env GOPATH)/bin"
+
 WORKDIR /app
 
 ENV GO111MODULE=on
-
-COPY src/ ./
 
 COPY src/go.mod ./
 COPY src/go.sum ./
 
 RUN go mod download
+
+COPY src/ ./
 
 RUN mkdir -p ent/migrate/migrations
 
