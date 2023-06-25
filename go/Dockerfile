@@ -23,6 +23,8 @@ RUN npm -g install protoc-gen-ts
 
 WORKDIR /app
 
+ENV GO111MODULE=on
+
 COPY src/ ./
 
 COPY src/go.mod ./
