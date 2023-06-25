@@ -6,7 +6,7 @@ import (
 	"log"
 	"os"
 
-	"./ent/migrate"
+	"src/ent/migrate"
 
 	atlas "ariga.io/atlas/sql/migrate"
 	"entgo.io/ent/dialect"

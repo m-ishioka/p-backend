@@ -24,11 +24,11 @@ RUN npm -g install protoc-gen-ts
 WORKDIR /app
 
 COPY src/ ./
-COPY src/ ./usr/local/go/src/src/
-COPY src/ ./usr/local/go/src/
-COPY src/ ./usr/local/go/
 
+COPY src/go.mod ./
+COPY src/go.sum ./
 
+RUN go mod download
 
 RUN mkdir -p ent/migrate/migrations
 
