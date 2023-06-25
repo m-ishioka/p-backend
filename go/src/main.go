@@ -63,16 +63,14 @@ func main() {
 	// }))
 	// http.ListenAndServe(":5001", grpcMux)
 
+	healthSvc := health.NewServer()
+  healthpb.RegisterHealthServer(grpcServer, healthSvc)
+  healthSvc.SetServingStatus("bookstore.BookstoreService", healthpb.HealthCheckResponse_SERVING)
+
 	lis, err := net.Listen("tcp", ":5001")
 	reflection.Register(grpcServer)
 	// // grpcServer.RegisterService(&entpb.ProcessTypeService_ServiceDesc, svc)
 	if err := grpcServer.Serve(lis); err != nil {
 		log.Fatalf("server ended: %s", err)
 	}
-
-	healthSvc := health.NewServer()
-  healthpb.RegisterHealthServer(grpcServer, healthSvc)
-  healthSvc.SetServingStatus("bookstore.BookstoreService", healthpb.HealthCheckResponse_SERVING)
-
-  reflection.Register(grpcServer)
 }
