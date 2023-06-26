@@ -1,0 +1,38 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: p-backend10
+  labels:
+    cloud.googleapis.com/location: asia-northeast1
+  annotations:
+    run.googleapis.com/launch-stage: BETA
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/minScale: "1"
+        autoscaling.knative.dev/maxScale: "1"
+        run.googleapis.com/execution-environment: gen1
+        run.googleapis.com/container-dependencies: '{"proxy":["grpc"]}'
+    spec:
+      containers:
+        - image: gcr.io/private-390603/p-proxy:latest
+          name: proxy
+          ports:
+            - containerPort: 8080
+          startupProbe:
+            tcpSocket:
+              port: 8080
+          resources:
+            limits:
+              cpu: ".08"
+              memory: 128Mi
+        - image: gcr.io/private-390603/p-server-go:latest
+          name: grpc
+          resources:
+            limits:
+              cpu: ".08"
+              memory: 128Mi
+          startupProbe:
+            tcpSocket:
+              port: 5001

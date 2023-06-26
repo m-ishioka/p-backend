@@ -28,7 +28,18 @@ func main() {
 	fmt.Println(value2)
 
 	// client, err := ent.Open("mysql", "test_user:test_password@tcp(p-db:3306)/test_db?parseTime=True")
-	client, err := ent.Open("mysql", "root:.0nj+*4MSb0mAtN=@tcp(34.84.131.120:3306)/p-db?parseTime=True")
+	// client, err := ent.Open("mysql", "root:.0nj+*4MSb0mAtN=@tcp(34.84.131.120:3306)/p-db?parseTime=True")
+
+	// var (
+	// 	dbUser         = "root"
+	// 	dbPwd          = ".0nj+*4MSb0mAtN="
+	// 	dbName         = "p-db"
+	// 	unixSocketPath = "/cloudsql/private-390603:asia-northeast1:p-db"
+	// )
+
+	// dbURI := fmt.Sprintf("%s:%s@unix(%s)/%s?parseTime=true", dbUser, dbPwd, unixSocketPath, dbName)
+	client, err := ent.Open("mysql", "root:.0nj+*4MSb0mAtN=@unix(/cloudsql/private-390603:asia-northeast1:p-db)/p-db?parseTime=true")
+
 	if err != nil {
 		log.Fatalf("failed opening connection to mysql: %v", err)
 		fmt.Println("データベース接続失敗")
@@ -37,38 +48,17 @@ func main() {
 	}
 	defer client.Close()
 
-	// wrappedGrpcServer := grpcweb.WrapServer(grpcServer, grpcweb.WithOriginFunc(func(origin string) bool { return true }))
-
 	grpcServer := grpc.NewServer()
-	// grpcweb.WithAllowNonRootResource(true)
-	// grpcweb.WithCorsForRegisteredEndpointsOnly(false)
 	entpb.RegisterProcessTypeServiceServer(grpcServer, entpb.NewProcessTypeService(client))
 	entpb.RegisterProjectServiceServer(grpcServer, service.NewCustomProjectService(client))
 	entpb.RegisterSkillServiceServer(grpcServer, service.NewCustomSkillService(client))
 	entpb.RegisterSkillTypeServiceServer(grpcServer, entpb.NewSkillTypeService(client))
-
-	// grpcMux := http.NewServeMux()
-	// grpcMux.Handle("/", wrappedGrpcServer)
-	// grpcMux.Handle("/", http.HandlerFunc(func(resp http.ResponseWriter, req *http.Request) {
-	// 	if wrappedGrpcServer.IsGrpcWebRequest(req) {
-	// 		fmt.Println("grpc web request")
-	// 		// fmt.Println(grpcweb.ListGRPCResources(server))
-	// 		wrappedGrpcServer.ServeHTTP(resp, req)
-	// 		// grpcServer.ServeHTTP(resp, req)
-	// 		return
-	// 	}
-	// 	fmt.Println("web request")
-	// 	http.DefaultServeMux.ServeHTTP(resp, req)
-	// 	fmt.Fprintf(resp, "Hello!")
-	// }))
-	// http.ListenAndServe(":5001", grpcMux)
 	healthSvc := health.NewServer()
   healthpb.RegisterHealthServer(grpcServer, healthSvc)
   healthSvc.SetServingStatus("bookstore.BookstoreService", healthpb.HealthCheckResponse_SERVING)
 
 	lis, err := net.Listen("tcp", ":5001")
 	reflection.Register(grpcServer)
-	// // grpcServer.RegisterService(&entpb.ProcessTypeService_ServiceDesc, svc)
 	if err := grpcServer.Serve(lis); err != nil {
 		log.Fatalf("server ended: %s", err)
 	}

@@ -1,8 +1,3 @@
-admin:
-  access_log_path: /tmp/admin_access.log
-  address:
-    socket_address: { address: 0.0.0.0, port_value: 9901 }
-
 static_resources:
   listeners:
     - name: listener_0
@@ -24,9 +19,9 @@ static_resources:
                         - match: { prefix: "/" }
                           route:
                             cluster: echo_service
-                            timeout: 100s
+                            timeout: 0s
                             max_stream_duration:
-                              grpc_timeout_header_max: 100s
+                              grpc_timeout_header_max: 0s
                       cors:
                         allow_origin_string_match:
                           - prefix: "*"
@@ -47,7 +42,7 @@ static_resources:
   clusters:
     - name: echo_service
       connect_timeout: 0.25s
-      type: logical_dns
+      type: static
       http2_protocol_options: {}
       lb_policy: round_robin
       load_assignment:
