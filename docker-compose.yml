@@ -5,6 +5,12 @@ services:
     build:
       context: ./go/
       dockerfile: Dockerfile
+    environment:
+      APP_ENV: dev
+      MYSQL_USER: test_user
+      MYSQL_PASSEORD: test_password
+      MYSQL_HOST: p-db
+      MYSQL_NAME: test_db
     command: air -c .air.toml
     # command: go run main.go
     ports:

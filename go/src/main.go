@@ -22,23 +22,30 @@ func main() {
 	defer os.Setenv("GRPC_GO_LOG_VERBOSITY_LEVEL", "")
 	defer os.Setenv("GRPC_GO_LOG_SEVERITY_LEVEL", "")
 
-	value := os.Getenv("GRPC_GO_LOG_VERBOSITY_LEVEL")
-	value2 := os.Getenv("GRPC_GO_LOG_SEVERITY_LEVEL")
-	fmt.Println(value)
-	fmt.Println(value2)
-
-	// client, err := ent.Open("mysql", "test_user:test_password@tcp(p-db:3306)/test_db?parseTime=True")
-	// client, err := ent.Open("mysql", "root:.0nj+*4MSb0mAtN=@tcp(34.84.131.120:3306)/p-db?parseTime=True")
-
-	// var (
-	// 	dbUser         = "root"
-	// 	dbPwd          = ".0nj+*4MSb0mAtN="
-	// 	dbName         = "p-db"
-	// 	unixSocketPath = "/cloudsql/private-390603:asia-northeast1:p-db"
-	// )
-
-	// dbURI := fmt.Sprintf("%s:%s@unix(%s)/%s?parseTime=true", dbUser, dbPwd, unixSocketPath, dbName)
-	client, err := ent.Open("mysql", "root:.0nj+*4MSb0mAtN=@unix(/cloudsql/private-390603:asia-northeast1:p-db)/p-db?parseTime=true")
+	env := os.Getenv("APP_ENV")
+	var (
+		dbUser string
+		dbPwd string
+		dbHost string
+		dbName string
+		unixSocketPath string
+		dbURI string 
+	)
+	fmt.Printf("env : %v\n", env)
+	if env == "dev" {
+		dbUser         = os.Getenv("MYSQL_USER")
+		dbPwd          = os.Getenv("MYSQL_PASSWORD")
+		dbHost         = os.Getenv("MYSQL_HOST")
+		dbName         = os.Getenv("MYSQL_NAME")
+		dbURI          = fmt.Sprintf("%s:%s@tcp(%s:3306)/%s?parseTime=true", dbUser, dbPwd, dbHost, dbName)
+	} else {
+		dbUser         = os.Getenv("MYSQL_USER")
+		dbPwd          = os.Getenv("MYSQL_PASSWORD")
+		dbName         = os.Getenv("MYSQL_NAME")
+		unixSocketPath = os.Getenv("UNIX_SOCKET_PATH")
+		dbURI          = fmt.Sprintf("%s:%s@unix(%s)/%s?parseTime=true", dbUser, dbPwd, unixSocketPath, dbName)
+	}
+	client, err := ent.Open("mysql", dbURI)
 
 	if err != nil {
 		log.Fatalf("failed opening connection to mysql: %v", err)
