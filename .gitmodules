@@ -1,6 +1,6 @@
 [submodule "go/src/ent/proto"]
 	path = go/src/ent/proto
-	url = https://github.com/m-ishioka/p-protocol-buffuers
+	url = git@github.com:m-ishioka/p-protocol-buffuers
 [submodule "go/src/cmd/migration/seed"]
 	path = go/src/cmd/migration/seed
-	url = https://github.com/m-ishioka/p-db-seeder
+	url = git@github.com:m-ishioka/p-db-seeder

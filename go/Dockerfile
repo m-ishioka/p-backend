@@ -7,21 +7,9 @@ RUN apt-get update && apt-get install -y git && apt-get install -y unzip && apt-
 RUN apt-get install -y protobuf-compiler
 RUN go install github.com/cosmtrek/air@v1.29.0
 
-# WORKDIR /tmp/protoc
-# protoc
-# RUN curl -L https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOBUF_VERSION}/protoc-${PROTOBUF_VERSION}-linux-x86_64.zip -o protoc.zip && \
-#     unzip protoc.zip
-# RUN curl -L https://github.com/protocolbuffers/protobuf-javascript/releases/download/v${PROTOBUF_WEB_PLUGIN_VERSION}/protobuf-javascript-${PROTOBUF_WEB_PLUGIN_VERSION}-linux-x86_64.zip -o protoc-web-plugin.zip && \
-#     unzip protoc-web-plugin.zip
-# ENV PATH $PATH:/tmp/protoc/bin
-# ENV PATH $PATH:/tmp/protoc/protoc-gen-grpc-web
-# RUN echo $PATH
-
 RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - && apt install -y nodejs
 RUN npm -g install protoc-gen-grpc-web
 RUN npm -g install protoc-gen-ts
-
-# ENV PATH "$PATH:$(go env GOPATH)/bin"
 
 WORKDIR /app
 
@@ -48,5 +36,4 @@ RUN CGO_ENABLED=0 GOOS=linux go build -o /docker-gs-ping
 
 EXPOSE 5001
 
-# CMD ["go", "run", "main.go"]
 CMD ["/docker-gs-ping"]
